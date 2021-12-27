@@ -1,7 +1,42 @@
 #! /usr/bin/env bash
-set -euo pipefail
+# --------------------------------------------------------------------
+#                               SOURCE
+# --------------------------------------------------------------------
+# https://arslan.io/2019/07/03/how-to-write-idempotent-bash-scripts/
+
 
 #-e - Exit immediately if any command fails.
 #-u - Exit if an unset variable is invoked.
 #-o pipefail - Exit if a command in a piped series of commands fails.
 
+set -euo pipefail
+
+# Never use mkdir directly, instead use it with the-p flag. This flag make sure mkdir won’t error if the directory exists
+
+mkdir -p mydir
+
+# We create symbolic links with the following command
+# The -f flag removes the target destination before creating the symbolic link, hence it’ll always succeed.
+
+ln -sfn source target
+
+# delete file/files. Use the -f flag which ignores non-existent files.
+
+rm -f example.txt
+
+# Modifying a file
+# Here the -q means silent mode and -F enables fixed string mode. Grep will silently fail if /mnt/dev doesn’t exist so the echo statement will never be called.
+# If this is run again, you’ll end up having duplicate entries in your /etc/fstab. One way of making this idempotent is to make sure to check for certain placeholders via grep:
+
+if ! grep -qF "/mnt/dev" /etc/fstab; then
+  echo "/dev/sda1 /mnt/dev ext4 defaults 0 0" | sudo tee -a /etc/fstab
+fi
+
+#Check if variable, file or dir exists
+echo "complex set of rules" > /etc/conf/foo.txt
+#Calculating the text might be an expensive operation, hence you don’t want to write it every time you call the script. 
+#To make it idempotent you check if the file exists via the -f flag of the inbuilt test property of the shell:
+
+if [ ! -f "/etc/conf/foo.txt" ]; then
+ echo "complex set of rules" > /etc/conf/foo.txt
+fi
