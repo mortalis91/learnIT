@@ -90,4 +90,9 @@ alias lsd="ls -d */"
 
 # --------------------------------------------------------------------
 
+# ShellCheck - A shell script static analysis tool
+# source: https://github.com/koalaman/shellcheck#installing
+
+
+
 
