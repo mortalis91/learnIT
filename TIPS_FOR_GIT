@@ -1,0 +1,19 @@
+# Check out the main branch
+
+git checkout main
+
+# Sync the local and remote main branches
+
+git pull origin main
+
+# Create and check out a new branch
+
+git checkout -b YOUR_BRANCH_NAME
+
+# Commit all file changes
+
+git commit -a -m "YOUR_COMMIT_MESSAGE"
+
+# Push the changes to the remote repo on GitHub
+
+git push origin YOUR_BRANCH_NAME
