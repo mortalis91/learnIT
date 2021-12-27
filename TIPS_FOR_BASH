@@ -3,8 +3,45 @@
 #                               SOURCE
 # --------------------------------------------------------------------
 # https://arslan.io/2019/07/03/how-to-write-idempotent-bash-scripts/
+# https://timvisee.com/blog/elegant-bash-conditionals/
 
+# simple if-statements
 
+if [ expression ]
+then
+    command
+fi
+# or
+if [ expression ]; then command; fi
+
+# control operators
+
+&& # the AND operator, run the following command only if previous succeeded
+|| # the OR operator, run the following command only if previous failed
+
+# exit codes
+# The exit code is normally hidden. The status of the last run command is stored in the ? variable. You may inspect it by invoking
+
+echo $?
+
+# Imagine you want to source the ~/.profile file, but only if it is readable
+
+if [ -r ~/.profile ]; then
+    source ~/.profile
+fi
+
+# We can simplify this using control operators
+
+[ -r ~/.profile ] && . ~/.profile
+
+cat ~/.profile && echo This is your profile || echo Failed to read profile
+init && configure && install && cleanup || echo Install failed
+
+# A function or script returns the exit code of the last expression
+
+test -f "FILE" && source "$_" || echo "$_ does not exist" >&2
+
+# --------------------------------------------------------------------
 # -e - Exit immediately if any command fails.
 # -u - Exit if an unset variable is invoked.
 # -o pipefail - Exit if a command in a piped series of commands fails.
@@ -93,6 +130,6 @@ alias lsd="ls -d */"
 # ShellCheck - A shell script static analysis tool
 # source: https://github.com/koalaman/shellcheck#installing
 
-
+shellcheck name_script
 
 
