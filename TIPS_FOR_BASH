@@ -41,6 +41,15 @@ init && configure && install && cleanup || echo Install failed
 
 test -f "FILE" && source "$_" || echo "$_ does not exist" >&2
 
+# job control
+
+# The fg command moves a background job into the foreground.
+# The bg command moves a suspended foreground job into the background.
+# The jobs command shows the current list of jobs.
+# The kill command can kill jobs or send signals to them.
+# The disown command removes a job from the list of jobs (without killing it).
+# A foreground job can be suspended by typing ^Z (Control-Z). A suspended job is temporarily stopped
+
 # --------------------------------------------------------------------
 # -e - Exit immediately if any command fails.
 # -u - Exit if an unset variable is invoked.
@@ -132,4 +141,7 @@ alias lsd="ls -d */"
 
 shellcheck name_script
 
+# Use tar to dump the archive directly into SSH and un-tar it at the other
+
+tar cf - 100k | ssh joe@10.1.0.1:/destination/ "tar -x" 
 
