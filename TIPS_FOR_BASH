@@ -145,3 +145,17 @@ shellcheck name_script
 
 tar cf - 100k | ssh joe@10.1.0.1:/destination/ "tar -x" 
 
+# VI
+
+# i or a - editing
+# ^ - Go to beginning of line
+# $ - Go to end of line
+# w - Go to next word
+# b - Go to previous word
+# e - Move to the end of the previous word
+# r - e - Replace current character by another (ex: e)
+# x - Delete current character
+# d - b - Delete previous word
+# d - w - Delete next word
+# v - Edit the current command in your text editor
+# u - Undo previous action(s)
