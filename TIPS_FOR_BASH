@@ -70,6 +70,17 @@ ln -sfn source target
 
 rm -f example.txt
 
+# history built-in command to display your whole history
+
+history | tail -n 5
+
+# !-n refers to the nth latest command: !-1 refers to the latest command, !-2 to the command before that, etc.
+!-n
+
+# !! is oftentimes used in conjunction with sudo, to re-execute the previous command with superuser privileges when it failed, due to a lack of permission.
+
+sudo !!
+
 # Modifying a file
 # Here the -q means silent mode and -F enables fixed string mode. Grep will silently fail if /mnt/dev doesn’t exist so the echo statement will never be called.
 # If this is run again, you’ll end up having duplicate entries in your /etc/fstab. One way of making this idempotent is to make sure to check for certain placeholders via grep
@@ -159,3 +170,4 @@ tar cf - 100k | ssh joe@10.1.0.1:/destination/ "tar -x"
 # d - w - Delete next word
 # v - Edit the current command in your text editor
 # u - Undo previous action(s)
+
