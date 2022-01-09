@@ -5,6 +5,9 @@
 # https://arslan.io/2019/07/03/how-to-write-idempotent-bash-scripts/
 # https://timvisee.com/blog/elegant-bash-conditionals/
 # https://eklitzke.org/bash-$*-and-$@
+# https://dev.to/rpalo/handling-arguments-in-bash-scripts-3o5m
+# https://joshstaiger.org/archives/2005/07/bash_profile_vs.html
+# https://dev.to/awwsmm/101-bash-commands-and-tips-for-beginners-to-experts-30je
 
 # When you login (type username and password) via console: .bash_profile is executed to configure your shell before the initial command prompt.
 
@@ -46,7 +49,38 @@ echo ${url^^a}
 echo ${url/https/ftp}
 # => ftp://assertnotmagic.com
 
+# working directory
+pwd
 
+# List the contents of this directory
+ls
+
+# Show hidden ("dot") files with ls -a
+# Show file details with ls -l
+# Combine multiple flags like ls -l -a
+# You can sometimes chain flags like ls -la instead of ls -l -a
+
+# change directory
+cd
+# cd to the parent directory”
+cd ..
+
+# create file
+touch name_faile
+# create directory
+mkdir name_directory
+
+# remove files/directories rm/rmdir
+# rmdir removes empty directories only
+# prompt rm -i
+# you can remove a directory -- and all of its contents
+rm -rf #(-r = recursive, -f = force)
+
+# Moving and Copying Files, Making Links, Command History mv / cp / ln
+mv a b
+cp a b
+# The -f flag removes the target destination before creating the symbolic link, hence it’ll always succeed.
+ln -sfn source target
 
 # simple if-statements
 if [ expression ]
@@ -116,13 +150,24 @@ set -o errexit
 
 mkdir -p mydir
 
-# We create symbolic links with the following command
-# The -f flag removes the target destination before creating the symbolic link, hence it’ll always succeed.
 
-ln -sfn source target
 
 # delete file/files. Use the -f flag which ignores non-existent files.
 rm -f example.txt
+
+# head / tail / cat / less
+head -n 3 c
+
+# cat / less
+# concatenates a list of files and sends them to the standard output stream (usually the terminal)
+
+# nano is a minimalistic command-line text editor
+
+# nedit is a small graphical editor
+
+# GUI editors -> emacs, vi, vim, gedit
+
+
 
 # history built-in command to display your whole history
 history | tail -n 5
@@ -131,8 +176,6 @@ history | tail -n 5
 $ HISTTIMEFORMAT='I ran this at: %d/%m/%y %T '
 
 # So this is an alternative to running sleep 1 && exit: $ TMOUT=1
-
-
 
 # !-n refers to the nth latest command: !-1 refers to the latest command, !-2 to the command before that, etc.
 !-n
@@ -150,14 +193,9 @@ vim !$
 $ cp /path/to/some/file !#:1.bak
 cp /path/to/some/file /path/to/some/file.bak
 
-# Your home directory
-~	
-
-# Your current working directory
-~+	
-
-# Your previous working directory
-~-	
+# Your home directory ~	
+# Your current working directory ~+	
+# Your previous working directory ~-	
 
 # ** is expanded to all files and directories in the children directories, with a depth limit of 1.
 ls **
