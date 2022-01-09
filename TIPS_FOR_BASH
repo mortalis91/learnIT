@@ -9,8 +9,8 @@
 # https://joshstaiger.org/archives/2005/07/bash_profile_vs.html
 # https://dev.to/awwsmm/101-bash-commands-and-tips-for-beginners-to-experts-30je
 
+# Types of Shells
 # When you login (type username and password) via console: .bash_profile is executed to configure your shell before the initial command prompt.
-
 # But, if you’ve already logged into your machine and open a new terminal window (xterm) inside Gnome or KDE, then .bashrc is executed before the window command prompt. 
 # .bashrc is also run when you start a new bash instance by typing /bin/bash in a terminal
 
@@ -22,6 +22,35 @@
 if [ -f ~/.bashrc ]; then
    source ~/.bashrc
 fi
+
+# ~/.bashrc
+# /etc/profile
+# ~/.bash_profile
+# ~/.bash_login
+# ~/.profile
+# ~/.bash_logout
+# /etc/bash.bash_logout
+
+# Finding Things
+# whereis searches for "possibly useful" files related to a particular command. It will attempt to return the location of the binary
+whereis / which / whatis
+
+# locate / find - locate finds a file anywhere on the system by referring to a semi-regularly-updated cached list of files
+locate README.md
+find ~/ -iname "README.md"
+
+# ping / wget / curl
+# curl supports many more protocols and is more widely available than wget; curl can also send data, while wget can only receive data. 
+# wget can download files recursively, while curl cannot.
+ping # attempts to open a line of communication with a network host
+wget # is used to easily download a file from the Internet
+curl # can be used just like wget (don’t forget the --output flag)
+
+# apt / gunzip / tar / gzip
+apt install/search # It can be used to install, upgrade, or delete software on your machine
+gunzip name.tar.gz
+tar -zcf name.tar.gz
+gzip name.tar
 
 # script parameters
 $*	 # $1 $2 $3...
@@ -150,14 +179,11 @@ set -o errexit
 
 mkdir -p mydir
 
-
-
 # delete file/files. Use the -f flag which ignores non-existent files.
 rm -f example.txt
 
 # head / tail / cat / less
 head -n 3 c
-
 # cat / less
 # concatenates a list of files and sends them to the standard output stream (usually the terminal)
 
@@ -166,8 +192,6 @@ head -n 3 c
 # nedit is a small graphical editor
 
 # GUI editors -> emacs, vi, vim, gedit
-
-
 
 # history built-in command to display your whole history
 history | tail -n 5
@@ -197,6 +221,28 @@ cp /path/to/some/file /path/to/some/file.bak
 # Your current working directory ~+	
 # Your previous working directory ~-	
 
+# df is used to show how much space is taken up by files for the disks or your system (hard drives, etc.)
+df -h
+
+# du shows file space usage for a particular directory and its subdirectories
+du -h --max-depth=1
+
+# shows all of the user's currently-running processes
+ps
+
+# NCurses Disk Usage - provides a navigable overview of file space usage
+ncdu
+
+# displays all currently-running processes and their owners, memory usage, and more
+top / htop
+
+# Environment variables
+printenv
+
+myvar=hello
+unset mynewvar
+echo $mynewvar
+
 # ** is expanded to all files and directories in the children directories, with a depth limit of 1.
 ls **
 mv **/*.{jpg,mp3} ~/assets/
@@ -204,6 +250,62 @@ mv **/*.{jpg,mp3} ~/assets/
 # Brace expansion
 mkdir ~/test/{pics,sounds,sprites}
 touch ~/test/sounds/noise-{1..5}.mp3
+
+groups # shows all of the groups of which the current user is a member
+groupadd
+groupdel
+
+# Text Processing
+# uniq / sort / diff / cmp
+uniq # can print unique lines (default) or repeated lines
+sort # will sort lines alphabetically / numerically
+diff # will report which lines differ between two files
+cmp # reports which bytes differ between two files
+
+# cut / sed
+cut # usually used to cut a line into sections on some delimiter
+# -d specifies the delimiter and -f specifies the field index to print (starting with 1 for the first field)
+sed # commonly used to replace a string with another string in a file
+
+# Pattern Matching
+# grep allows for 
+# (-E) use of extended regular expressions, 
+# (-F) matching any one of multiple strings at once 
+# (-r) recursively searching files within a directory
+grep # used to find lines of a file which match some pattern
+
+# pattern-matching language built around reading and manipulating delimited data files, like CSV files
+awk
+
+# ssh / scp
+ssh # how Unix-based machines connect to each other over a network
+scp # (secure copy; note that scp uses –P for a port #, ssh uses –p)
+
+rsync # file-copying tool which minimises the amount of data copied by looking for deltas (changes) between files
+rsync -av ../s/* .
+
+# Long-Running Processes
+# yes / nohup / ps / kill
+nohup yes &
+
+# cron / crontab / >>
+# provides an easy way of automating regular, scheduled tasks
+# You can edit your cron jobs with crontab –e
+
+# pushd / popd
+# Use pushd and popd to maintain a directory stack, instead of cd-ing everywhere
+
+# w / write / wall / lynx
+# w is a more detailed who, showing who’s logged in and what they’re doing
+# write sends a message to a specific user
+# wall is similar to write, but it sends the same message to every logged-in user
+# lynx is a fully-functional, text-based web browser
+
+# nautilus / date / cal / bc
+# nautilus initialises a GUI remote desktop session and opens a file browser
+# date shows the current date and time
+# cal shows an ASCII calendar of this month with today’s date highlighted
+# bc is a basic arithmetic calculator (use Python instead)
 
 # Your shell can replace a command surrounded by $() with its output.
 My name is $(whoami) and I live in $HOME
