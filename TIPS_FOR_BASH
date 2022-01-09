@@ -54,6 +54,7 @@ gzip name.tar
 
 #best option for script
 some_command "$arg1" "$arg2" "$arg3"
+"${var1}more string content${var2}"
 
 # script parameters
 $*	 # $1 $2 $3...
