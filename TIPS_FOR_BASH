@@ -6,12 +6,45 @@
 # https://timvisee.com/blog/elegant-bash-conditionals/
 # https://eklitzke.org/bash-$*-and-$@
 
+# When you login (type username and password) via console: .bash_profile is executed to configure your shell before the initial command prompt.
+
+# But, if you’ve already logged into your machine and open a new terminal window (xterm) inside Gnome or KDE, then .bashrc is executed before the window command prompt. 
+# .bashrc is also run when you start a new bash instance by typing /bin/bash in a terminal
+
+# Recommendation
+# Most of the time you don’t want to maintain two separate config files for login and non-login shells — when you set a PATH, you want it to apply to both. 
+# You can fix this by sourcing .bashrc from your .bash_profile file, then putting PATH and common settings in .bashrc.
+
+# To do this, add the following lines to .bash_profile:
+if [ -f ~/.bashrc ]; then
+   source ~/.bashrc
+fi
 
 # script parameters
 $*	 # $1 $2 $3...
 $@	 # $1 $2 $3...
 "$*" # "$1 $2 $3..."
 "$@" # "$1" "$2" "$3"...
+
+ARG="${1? Missing value for argument 1}"
+
+url=https://assertnotmagic.com/about
+echo ${url#*/}     # Remove from the front, matching the pattern */, non-greedy
+# => /assertnotmagic.com/about
+echo ${url##*/}    # Same, but greedy
+# => about
+echo ${url%/*}     # Remove from the back, matching the pattern /*, non-greedy
+# => https://assertnotmagic.com
+echo ${url%%/*}    # Same, but greedy
+# => https:
+
+# You can uppercase matching letters!
+echo ${url^^a}
+# => https://AssertnotmAgic.com/About
+
+# You can replace patterns.
+echo ${url/https/ftp}
+# => ftp://assertnotmagic.com
 
 
 
@@ -94,6 +127,13 @@ rm -f example.txt
 # history built-in command to display your whole history
 history | tail -n 5
 
+# If you run history in your terminal you should get a list of commands previous run by your account.
+$ HISTTIMEFORMAT='I ran this at: %d/%m/%y %T '
+
+# So this is an alternative to running sleep 1 && exit: $ TMOUT=1
+
+
+
 # !-n refers to the nth latest command: !-1 refers to the latest command, !-2 to the command before that, etc.
 !-n
 
@@ -104,6 +144,11 @@ sudo !!
 # !$ maps to the last argument of your latest command
 vim !^
 vim !$
+
+!#:1 – The ‘The Current Line’ One
+
+$ cp /path/to/some/file !#:1.bak
+cp /path/to/some/file /path/to/some/file.bak
 
 # Your home directory
 ~	
