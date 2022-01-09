@@ -67,21 +67,47 @@ mkdir -p mydir
 ln -sfn source target
 
 # delete file/files. Use the -f flag which ignores non-existent files.
-
 rm -f example.txt
 
 # history built-in command to display your whole history
-
 history | tail -n 5
 
 # !-n refers to the nth latest command: !-1 refers to the latest command, !-2 to the command before that, etc.
 !-n
 
 # !! is oftentimes used in conjunction with sudo, to re-execute the previous command with superuser privileges when it failed, due to a lack of permission.
-
 sudo !!
 
+# !^ maps to the first argument of your latest command
+# !$ maps to the last argument of your latest command
+vim !^
+vim !$
 
+# Your home directory
+~	
+
+# Your current working directory
+~+	
+
+# Your previous working directory
+~-	
+
+# ** is expanded to all files and directories in the children directories, with a depth limit of 1.
+ls **
+mv **/*.{jpg,mp3} ~/assets/
+
+# Brace expansion
+mkdir ~/test/{pics,sounds,sprites}
+touch ~/test/sounds/noise-{1..5}.mp3
+
+# Your shell can replace a command surrounded by $() with its output.
+My name is $(whoami) and I live in $HOME
+
+# Renaming multiple directories
+# the */ glob pattern is expanded over the list of directories, on which we iterate via a for loop
+for dir in */; do
+    mv "$dir" "$(echo "$dir" | tr '[:lower:]' '[:upper:]')"
+  done
 
 # Modifying a file
 # Here the -q means silent mode and -F enables fixed string mode. Grep will silently fail if /mnt/dev doesn’t exist so the echo statement will never be called.
