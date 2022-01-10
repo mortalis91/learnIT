@@ -8,6 +8,7 @@
 # https://dev.to/rpalo/handling-arguments-in-bash-scripts-3o5m
 # https://joshstaiger.org/archives/2005/07/bash_profile_vs.html
 # https://dev.to/awwsmm/101-bash-commands-and-tips-for-beginners-to-experts-30je
+# https://alexpetralia.com/posts/2017/6/26/learning-linux-bash-to-get-things-done
 
 # Types of Shells
 # When you login (type username and password) via console: .bash_profile is executed to configure your shell before the initial command prompt.
@@ -270,6 +271,10 @@ cmp # reports which bytes differ between two files
 cut # usually used to cut a line into sections on some delimiter
 # -d specifies the delimiter and -f specifies the field index to print (starting with 1 for the first field)
 sed # commonly used to replace a string with another string in a file
+sed -i "s/{find}/{replace}/g" {file}
+
+# replace a string for each file in this and child folders with a name like *.txt
+find . -type f -name '*.txt' -exec sed -i "s/{find}/{replace}/g" {} \;
 
 # Pattern Matching
 # grep allows for 
@@ -310,6 +315,20 @@ nohup yes &
 # date shows the current date and time
 # cal shows an ASCII calendar of this month with today’s date highlighted
 # bc is a basic arithmetic calculator (use Python instead)
+
+# list currently open Internet/UNIX sockets and related information
+netstat | head -n20
+
+# stream current disk, network, CPU activity & more
+dstat -a
+
+# kernel information
+uname -a
+
+# OS information
+lsb_release -a
+
+
 
 # Your shell can replace a command surrounded by $() with its output.
 My name is $(whoami) and I live in $HOME
