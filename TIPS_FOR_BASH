@@ -328,6 +328,14 @@ uname -a
 # OS information
 lsb_release -a
 
+# This tells bash that it should exit the script if any statement returns a non-true return value
+command
+if [ "$?"-ne 0]; then echo "command failed"; exit 1; fi
+
+command || { echo "command failed"; exit 1; }
+
+if ! command; then echo "command failed"; exit 1; fi
+
 
 
 # Your shell can replace a command surrounded by $() with its output.
