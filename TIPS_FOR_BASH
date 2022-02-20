@@ -235,11 +235,17 @@ du -h --max-depth=1
 # shows all of the user's currently-running processes
 ps
 
+ps aux | head -n20
+# print currently active processes
+
 # NCurses Disk Usage - provides a navigable overview of file space usage
 ncdu
 
 # displays all currently-running processes and their owners, memory usage, and more
 top / htop
+
+column -s, -t <delimited_file>
+# display a comma-delimited file in columnar format
 
 # Environment variables
 printenv
